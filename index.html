@@ -252,7 +252,8 @@
       align-items:center;
       justify-content:center;
     }
-    .gallery-frame img { width: 100%; height: 100%; object-fit: contain; max-height: 70vh; }
+    .gallery-frame img,
+    .gallery-frame video { width: 100%; height: 100%; object-fit: contain; max-height: 70vh; }
     .gallery-controls { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
     .gallery-nav { display:flex; gap:10px; }
     .gallery-pagination { color: var(--muted); font-size: 14px; }
@@ -475,13 +476,14 @@
     <h2 class="gallery-title" id="galleryTitle">อัลบั้มภาพ SCP-TH-3921</h2>
     <div class="gallery-frame">
       <img src="d-scp.png" alt="ภาพประกอบภารกิจ SCP-TH-3921" data-gallery-img />
+      <video data-gallery-video controls playsinline preload="metadata" hidden></video>
     </div>
     <div class="gallery-controls">
       <div class="gallery-nav">
         <button class="btn ghost" type="button" data-gallery-prev aria-label="ภาพก่อนหน้า">ก่อนหน้า</button>
         <button class="btn" type="button" data-gallery-next aria-label="ภาพถัดไป">ถัดไป</button>
       </div>
-      <div class="gallery-pagination"><span data-gallery-index>1</span> / <span data-gallery-total>2</span></div>
+      <div class="gallery-pagination"><span data-gallery-index>1</span> / <span data-gallery-total>4</span></div>
     </div>
   </div>
 </div>
@@ -537,14 +539,17 @@
       }
 
       const galleryImages = [
-        { src: 'd-scp.png', alt: 'ภาพประกอบภารกิจ SCP-TH-3921' },
-        { src: 'd-scp2.png', alt: 'ภาพประกอบเพิ่มเติม SCP-TH-3921' },
+        { src: 'd-scp.png', alt: 'Field dossier cover for SCP-TH-3921', type: 'image' },
+        { src: 'd-scp2.png', alt: 'Containment briefing sheet for SCP-TH-3921', type: 'image' },
+        { src: 'p-010929.png', alt: 'Field photograph of SCP-TH-3921', type: 'image' },
+        { src: 'dorner.mp4', alt: 'Interview footage regarding SCP-TH-3921', type: 'video', poster: 'p-010929.png' },
       ];
       const openGalleryBtn = document.getElementById('openGallery');
       const galleryModal = document.getElementById('galleryModal');
       if (openGalleryBtn && galleryModal && galleryImages.length) {
         const dialog = galleryModal.querySelector('.gallery-dialog');
         const imageEl = galleryModal.querySelector('[data-gallery-img]');
+        const videoEl = galleryModal.querySelector('[data-gallery-video]');
         const indexEl = galleryModal.querySelector('[data-gallery-index]');
         const totalEl = galleryModal.querySelector('[data-gallery-total]');
         const prevBtn = galleryModal.querySelector('[data-gallery-prev]');
@@ -556,10 +561,47 @@
 
         const render = () => {
           const currentItem = galleryImages[current];
-          if (imageEl) {
-            imageEl.src = currentItem.src;
-            imageEl.alt = currentItem.alt;
+          if (videoEl) {
+            videoEl.pause();
+            videoEl.currentTime = 0;
           }
+
+          if (currentItem.type === 'video') {
+            if (imageEl) {
+              imageEl.hidden = true;
+              imageEl.removeAttribute('src');
+              imageEl.removeAttribute('alt');
+            }
+            if (videoEl) {
+              videoEl.hidden = false;
+              if (currentItem.poster) {
+                videoEl.poster = currentItem.poster;
+              } else {
+                videoEl.removeAttribute('poster');
+              }
+              videoEl.src = currentItem.src;
+              if (currentItem.alt) {
+                videoEl.setAttribute('aria-label', currentItem.alt);
+              } else {
+                videoEl.removeAttribute('aria-label');
+              }
+              videoEl.load();
+            }
+          } else {
+            if (videoEl) {
+              videoEl.hidden = true;
+              videoEl.removeAttribute('src');
+              videoEl.removeAttribute('poster');
+              videoEl.removeAttribute('aria-label');
+              videoEl.load();
+            }
+            if (imageEl) {
+              imageEl.hidden = false;
+              imageEl.src = currentItem.src;
+              imageEl.alt = currentItem.alt || '';
+            }
+          }
+
           if (indexEl) indexEl.textContent = String(current + 1);
         };
 
@@ -577,6 +619,10 @@
           galleryModal.hidden = true;
           galleryModal.setAttribute('aria-hidden', 'true');
           document.body.classList.remove('modal-open');
+          videoEl?.pause();
+          if (videoEl) {
+            videoEl.currentTime = 0;
+          }
           openGalleryBtn.focus();
         };
 
