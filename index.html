@@ -109,6 +109,15 @@
       box-shadow: var(--shadow);
     }
     .badge .dot { width:10px; height:10px; border-radius:999px; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent); }
+    .meta .badge {
+      background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 35%, transparent), color-mix(in oklab, var(--panel) 85%, transparent));
+      border-color: color-mix(in oklab, var(--accent) 60%, transparent);
+      color: var(--text);
+      font-size: 13px;
+      padding: 10px 16px;
+      box-shadow: 0 14px 26px rgba(8, 12, 18, .38);
+    }
+    .meta .badge .dot { width:12px; height:12px; }
 
     .paper {
       background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 90%, transparent), var(--panel));
@@ -119,13 +128,36 @@
       display:grid; grid-template-columns: 1fr auto; gap: 12px; align-items:flex-start;
       padding: 24px 22px 12px; border-bottom: 1px dashed var(--border);
     }
-    .paper .titlexl { font-size: clamp(22px, 2.8vw, 34px); margin: 0 0 6px; line-height: 1.25; }
-    .meta { display:flex; flex-wrap:wrap; gap:8px; color: var(--muted); font-size: 14px; }
+    .paper .titlexl {
+      font-size: clamp(30px, 3.8vw, 46px);
+      margin: 0 0 8px;
+      line-height: 1.2;
+      color: var(--brand);
+      text-shadow: 0 14px 28px rgba(10, 16, 28, .45);
+      letter-spacing: .6px;
+    }
+    .meta { display:flex; flex-wrap:wrap; gap:12px; color: var(--muted); font-size: 14px; margin-bottom: 8px; }
 
     .grid { display:grid; gap: 16px; padding: 18px 22px 26px; }
     .section { background: var(--card); border:1px solid var(--border); border-radius: 16px; padding: 18px 18px; }
-    .section h3 { margin: 0 0 10px; font-size: 18px; }
+    .section h3 { margin: 0; font-size: inherit; }
     .section h4 { margin: 16px 0 8px; font-size: 16px; }
+    .section-title {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size: 20px;
+      color: var(--brand);
+      letter-spacing:.4px;
+      margin: 0 0 12px;
+    }
+    .section-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+      opacity: .88;
+      flex-shrink:0;
+    }
 
     .callout {
       border-left: 6px solid var(--accent);
@@ -352,19 +384,8 @@
             <span class="badge"><span class="dot"></span> ระดับวัตถุ: Euclid</span>
             <span class="badge" style="--accent: var(--accent-2);"><span class="dot" style="background: var(--accent-2);"></span> สถานะ: กักกันมีเสถียรภาพ</span>
           </div>
-          <nav class="toc" aria-label="สารบัญ">
-            <a class="badge" href="#containment">มาตรการกักกัน</a>
-            <a class="badge" href="#description">คำอธิบาย</a>
-            <a class="badge" href="#discovery">ประวัติการค้นพบ</a>
-            <a class="badge" href="#experiments">บันทึกการทดลอง</a>
-            <a class="badge" href="#interview">บันทึกสัมภาษณ์</a>
-            <a class="badge" href="#incident">เหตุการณ์</a>
-            <a class="badge" href="#updates">อัปเดตมาตรการ</a>
-            <a class="badge" href="#use">ศักยภาพการใช้ประโยชน์</a>
-            <a class="badge" href="#status">สถานะปัจจุบัน</a>
-          </nav>
         </div>
-        <div class="callout gallery-callout" role="note" style="min-width:260px">
+        <div class="callout gallery-callout" role="note">
           <strong>อัลบั้มภาพประกอบ</strong>
           <p style="margin:0">คลิกเพื่อเปิดดูภาพประกอบของ SCP-TH-3921</p>
           <button class="btn" type="button" id="openGallery">เปิดอัลบั้มภาพ</button>
@@ -373,13 +394,19 @@
 
       <div class="grid">
         <section id="containment" class="section">
-          <h3>มาตรการกักกันพิเศษ</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 2l7.5 4.33v11.34L12 22l-7.5-4.33V6.33L12 2zm0 2.3L6.5 6.6v10.8L12 19.7l5.5-3.3V6.6L12 4.3zm0 2.4l3.5 2.02v4.03L12 14.8 8.5 12.75V8.72L12 6.7z"></path></svg>
+            <span>มาตรการกักกันพิเศษ</span>
+          </h3>
           <p>SCP-TH-3921 ถูกกักกันในห้องความดันลบระดับ-3 พร้อมประตูอากาศ 3 ชั้นและระบบกรองอากาศแบบดูดซับหลายชั้น (คาร์บอนกัมมันต์/ซีโอไลต์/ตัวเร่งปฏิกิริยาออกซิเดชันเย็น) ท่อระบายทั้งหมดต้องมีวาล์วกลับทางและกับดักเจลซิลิกาเปลี่ยนใหม่ทุก 12 ชั่วโมงโดยแขนกลอัตโนมัติ ห้ามบุคลากรเข้าใกล้ในรัศมี 15 เมตรโดยปราศจากชุดปิดผนึกเต็มตัว (รุ่น OLFA-9) และหน้ากากกรองชนิด “Olfacto-Shield” (ฟิลเตอร์ OS-TS)</p>
           <p>ตัวอย่างอากาศจากห้องกักกันให้เก็บแช่แข็งที่ −80 °C และติดฉลาก “TS-คงสภาพ” ห้ามเปิดขวดภายนอกตู้ความปลอดภัยชีวภาพระดับ 3.5 ทุกเอกสารภาคสนามที่บรรยาย “กลิ่น” ต้องผ่านการลบคำเชิงพรรณนาตาม โปรโตคอลดีโอโดรา (Deodora) เพื่อหลีกเลี่ยงผลกระทบด้านการรับรู้ (ดูคำอธิบายผล “อีเดโอสเมียซิส” ด้านล่าง)</p>
         </section>
 
         <section id="description" class="section">
-          <h3>คำอธิบาย</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 2c2.21 0 4 1.79 4 4a4 4 0 11-8 0c0-2.21 1.79-4 4-4zm0 6.2a2.2 2.2 0 100-4.4 2.2 2.2 0 000 4.4zM6.5 11.5h11a1.5 1.5 0 011.5 1.5v6.25c0 .69-.56 1.25-1.25 1.25H6.25A1.25 1.25 0 015 19.25V13a1.5 1.5 0 011.5-1.5zm.5 2v5h10v-5H7z"></path></svg>
+            <span>คำอธิบาย</span>
+          </h3>
           <p>SCP-TH-3921 เป็นมนุษย์เพศชายวัยผู้ใหญ่ สัญชาติไม่ทราบแน่ชัด ใช้นามเรียกตัวเองว่า “twijsri” (อ่าน: ทวิจ-ศรี) อวัยวะและสรีรวิทยาทั่วไปไม่ผิดปกติ ยกเว้นการหลั่งสารระเหยสูง (ชุดสารประกอบระบุเป็น TS-01 ถึง TS-██) ผ่านผิวหนังและรูขุมขนอย่างต่อเนื่อง แม้ในสภาวะพัก สารเหล่านี้มีคุณสมบัติผิดธรรมชาติ 3 ประการ:</p>
           <ul>
             <li><strong>การกระจายตัวแบบ “แทรกทะลุผนึก”</strong> — โมเลกุล TS สามารถซึมผ่านวัสดุปิดผนึกที่ควรป้องกันกลิ่นได้ (ยางซิลิโคน เทฟลอน โลหะบาง) ด้วยอัตราการแพร่สูงผิดปกติ ทำให้ “กลิ่น” เล็ดลอดแม้ระบบซีลสมบูรณ์</li>
@@ -391,12 +418,18 @@
         </section>
 
         <section id="discovery" class="section">
-          <h3>ประวัติการค้นพบ</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 4a8 8 0 015.29 13.88l2.41 2.41-1.42 1.42-2.41-2.41A8 8 0 1112 4zm0 2a6 6 0 100 12 6 6 0 000-12zm0 2.5a.75.75 0 01.75.75v2h2a.75.75 0 010 1.5h-2v2a.75.75 0 01-1.5 0v-2h-2a.75.75 0 010-1.5h2v-2A.75.75 0 0112 8.5z"></path></svg>
+            <span>ประวัติการค้นพบ</span>
+          </h3>
           <p>กู้คืนจากพื้นที่ชุมชนหนาแน่นใน จ.███ ประเทศไทย หลังมีรายงาน “บ้านผีเหม็น” ทำให้ชาวบ้านเป็นลมและเกิดอุบัติเหตุรถชนต่อเนื่อง MTF จางกลิ่น-3 ใช้เต็นท์ความดันลบเคลื่อนที่และโฟมปิดผนึกชั่วคราวเพื่อเคลื่อนย้ายเบื้องต้น มาตรการพ่นน้ำหอมและโอโซนที่ท้องถิ่นใช้ก่อนหน้าทำให้สถานการณ์เลวร้ายลง (เพิ่มสารอนุพันธ์กำมะถัน)</p>
         </section>
 
         <section id="experiments" class="section">
-          <h3>บันทึกการทดลองย่อ</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M8.5 3h7a1.5 1.5 0 011.5 1.5V6l3.26 5.43A3.5 3.5 0 0118.06 16H5.94a3.5 3.5 0 01-1.7-4.57L7.5 6V4.5A1.5 1.5 0 018.5 3zm5 3V4.5h-3V6a1.5 1.5 0 01-.21.77L6.87 12h10.26l-3.42-5.23A1.5 1.5 0 0113.5 6z"></path><path d="M7 18.5h10A1.5 1.5 0 0118.5 20v.5a1.5 1.5 0 01-1.5 1.5H7a1.5 1.5 0 01-1.5-1.5V20A1.5 1.5 0 017 18.5z"></path></svg>
+            <span>บันทึกการทดลองย่อ</span>
+          </h3>
           <div class="two-col">
             <div>
               <h4>T-12: สารดูดซับต่าง ๆ</h4>
@@ -414,7 +447,10 @@
         </section>
 
         <section id="interview" class="section">
-          <h3>บันทึกสัมภาษณ์ 3921-A (ตัดตอน)</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 3a6 6 0 014.47 9.93l2.3 2.3a.75.75 0 01-1.06 1.06l-2.3-2.3A6 6 0 1112 3zm0 1.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path><path d="M6.75 18.5h10.5a1.75 1.75 0 011.75 1.75V21a.75.75 0 01-.75.75H5.75A.75.75 0 015 21v-.75A1.75 1.75 0 016.75 18.5z"></path></svg>
+            <span>บันทึกสัมภาษณ์ 3921-A (ตัดตอน)</span>
+          </h3>
           <details open>
             <summary>คลิกเพื่อแสดง/ซ่อนบทสนทนา</summary>
             <div class="audio-player" data-audio-player>
@@ -441,12 +477,18 @@
         </section>
 
         <section id="incident" class="section">
-          <h3>เหตุการณ์ 3921-K: “ไม่เหม็นหรอก”</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 4.5l7.5 13h-15l7.5-13zm0 3.37l-4.24 7.36h8.48L12 7.87z"></path><path d="M11.25 11h1.5v3.5h-1.5V11zm0 4.5h1.5v1.5h-1.5v-1.5z"></path></svg>
+            <span>เหตุการณ์ 3921-K: “ไม่เหม็นหรอก”</span>
+          </h3>
           <p>ระหว่างเปลี่ยนฟิลเตอร์ชั้นที่ 2 เจ้าหน้าที่สองนายละเลยขั้นตอนยืนยันกลิ่นตามโปรโตคอลดีโอโดรา โดยกล่าวว่า “ไม่เหม็นแล้ว” ซ้ำ ๆ (ผลอีเดโอสเมียซิส) ทำให้เปิดผนึกพร้อมกันสองชั้นและเกิดการรั่วไหลในโถง B-2 นาน 11 นาที จำเป็นต้องอพยพโซนย่อยและล้างระบบอากาศ 36 ชั่วโมง</p>
         </section>
 
         <section id="updates" class="section">
-          <h3>อัปเดตมาตรการ (โปรโตคอลดีโอโดรา)</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 5a7 7 0 016.93 6.15l.07.85h1.5l-2.25 3.25-2.25-3.25H17l-.05-.65A5.5 5.5 0 1012 17.5a5.45 5.45 0 003.88-1.55l1.06 1.06A7 7 0 1112 5zm.75 3.75v3.19l2.68 1.55-.75 1.3L11 13V8.75h1.75z"></path></svg>
+            <span>อัปเดตมาตรการ (โปรโตคอลดีโอโดรา)</span>
+          </h3>
           <ul>
             <li>ทุก 30 นาที เจ้าหน้าที่ในเขต 3921 ต้องกล่าวยืนยันสภาพ olfactory checkpoint ตามสคริปต์สั้น ๆ (“ขณะนี้กลิ่นยังคงอยู่ ต้องปฏิบัติตามมาตรการ”) เพื่อหักล้างแนวโน้มปฏิเสธ</li>
             <li>ห้ามใช้คำพรรณนากลิ่นแบบมีอุปมา/อุปไมยในเอกสาร (ลดการกระตุ้น ideosmiasis ผ่านภาษา)</li>
@@ -455,12 +497,18 @@
         </section>
 
         <section id="use" class="section">
-          <h3>ศักยภาพการใช้ประโยชน์ (อยู่ระหว่างทบทวน)</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M7 3.75h10A1.25 1.25 0 0118.25 5v15a.75.75 0 01-.75.75H6.5a.75.75 0 01-.75-.75V5A1.25 1.25 0 017 3.75zm9.5 1.5h-9v12.5h9V5.25z"></path><path d="M9.5 6.75h5v1.5h-5v-1.5zM9.5 9.75h5v1.5h-5v-1.5zM9.5 12.75h3v1.5h-3v-1.5z"></path></svg>
+            <span>ศักยภาพการใช้ประโยชน์ (อยู่ระหว่างทบทวน)</span>
+          </h3>
           <p>การกลายพันธุ์จุลชีพที่ย่อย TS อย่างจำเพาะอาจนำไปสู่ตัวดูดซับสารเคมีรุ่นใหม่สำหรับโรงงาน/ภัยสารเคมี อย่างไรก็ตาม ความเสี่ยงด้านการแพร่กลิ่นและการปนเปื้อนมีมยังสูง</p>
         </section>
 
         <section id="status" class="section">
-          <h3>สถานะปัจจุบัน</h3>
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="section-icon"><path d="M12 3a9 9 0 018.9 7.89l.1 1.11h-1.5l-.08-.85A7.5 7.5 0 1012 19.5a7.43 7.43 0 005.3-2.2l1.06 1.06A9 9 0 1112 3zm.75 4v4.69l2.1 1.21-.75 1.3L11 12.5V7h1.75z"></path></svg>
+            <span>สถานะปัจจุบัน</span>
+          </h3>
           <p>กักกันมีเสถียรภาพ ภาวะอารมณ์ของวัตถุคงที่เมื่อได้รับการเว้นระยะจากบุคลากรและตารางกิจวัตรเดิม (อ่านหนังสือ/ออกกำลังในห้องความดันลบ) การเคลื่อนย้ายออกนอกไซต์ถือว่า “ไม่จำเป็น” จนกว่าจะมีระบบซีลรุ่นใหม่ที่ผ่านทดสอบการแทรกทะลุ TS</p>
         </section>
       </div>
@@ -782,3 +830,5 @@
   </script>
 </body>
 </html>
+
+
